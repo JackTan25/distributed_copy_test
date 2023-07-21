@@ -1,0 +1,1 @@
+"./standalone_copy_test/_after.sh", "1689946125600466133","bendsql --dsn databend://tanboyu:123456@tnc7yee14--test-distributed-copy-for-parquet.gw.aws-us-east-2.default.datafusecloud.com:443/test_distributed_copy_new?enable_distributed_copy_into=1 -q \select count(*) from products_\","2023-07-21 21:28:45.601152136","2023-07-21 21:28:47.913494183","2.312342","0","0"
