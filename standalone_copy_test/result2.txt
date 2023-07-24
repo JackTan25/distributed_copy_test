@@ -1,3 +1,2 @@
-a "800000" run 3
-b "400000" run 3
-b 发现 mismatch, 结束循环 
+a "0" run 38
+a 发现 mismatch, 结束循环 

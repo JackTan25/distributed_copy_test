@@ -1,3 +1,15 @@
-start run 5 "0"
-start run 5 "700000"
-b 发现 mismatch, 结束循环 "700000"
+start run 60 "0"
+start run 60 "APIError: ResponseError with 504: <html>
+<head><title>504 Gateway Time-out</title></head>
+<body>
+<center><h1>504 Gateway Time-out</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>"
+b 发现 mismatch, 结束循环 "APIError: ResponseError with 504: <html>
+<head><title>504 Gateway Time-out</title></head>
+<body>
+<center><h1>504 Gateway Time-out</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>"

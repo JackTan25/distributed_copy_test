@@ -1,3 +1,2 @@
-start run 6 "0"
-start run 6 "500000"
-b 发现 mismatch, 结束循环 "500000"
+start run 67 "800000"
+a 发现 mismatch, 结束循环 "800000"

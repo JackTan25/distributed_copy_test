@@ -1,3 +1,2 @@
-a "800000" run 3
-b \message\:\no available endpoints with label [warehouse:tnc7yee14-test-distributed-cop-3354a22e39 tenant:tnc7yee14]: Provision warehouse timeout\}}" run 3
-b 发现 mismatch, 结束循环 
+a "APIError: ResponseError with 500: " run 38
+a 发现 mismatch, 结束循环 
