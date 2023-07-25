@@ -1,2 +1,2 @@
-start run 67 "800000"
-a 发现 mismatch, 结束循环 "800000"
+start run 492 "7"
+stage 发现 mismatch, 结束循环 "7"

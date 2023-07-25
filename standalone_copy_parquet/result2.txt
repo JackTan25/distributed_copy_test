@@ -1,2 +1,2 @@
-start run 75 "600000"
-发现 mismatch, 结束循环 "600000"
+start run 644 \message\:\Health check failed: backend instance maybe crashed: Get \\http://10.1.116.87:8000/health\\: dial tcp 10.1.116.87:8000: connect: connection refused\}}"
+stage 发现 mismatch, 结束循环 \message\:\Health check failed: backend instance maybe crashed: Get \\http://10.1.116.87:8000/health\\: dial tcp 10.1.116.87:8000: connect: connection refused\}}"
