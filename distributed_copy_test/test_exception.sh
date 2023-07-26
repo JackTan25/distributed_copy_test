@@ -6,22 +6,33 @@ expected2="\"800000\""
 stage_expected="\"8\""
 stage_expected2="\"0\""
 for ((i=1; i<=1000; i++)); do
+    echo "" > ./distributed_copy_test/result1.txt
     # 测试 from stage
-    log_command bendsql --dsn "$DSN"  -q \"create stage s1 FILE_FORMAT = \(TYPE = CSV\)\"
-    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\"
-    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\"
-    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\"
-    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\"
-    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\"
-    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\"
-    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\"
-    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b from table_random2 limit 100000\)\"
-    log_command bendsql --dsn "$DSN"  -q \"copy into products from @s1 force = true purge = true\"
+    log_command bendsql --dsn "$DSN"  -q \"create stage s1 FILE_FORMAT = \(TYPE = CSV\)\" >> ./distributed_copy_test/result1.txt
+    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\" >> ./distributed_copy_test/result1.txt
+    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\" >> ./distributed_copy_test/result1.txt
+    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\" >> ./distributed_copy_test/result1.txt
+    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\" >> ./distributed_copy_test/result1.txt
+    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\" >> ./distributed_copy_test/result1.txt
+    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\" >> ./distributed_copy_test/result1.txt
+    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b,c from table_random limit 100000\)\" >> ./distributed_copy_test/result1.txt
+    log_command bendsql --dsn "$DSN"  -q \"copy into @s1 from \(select a,b from table_random2 limit 100000\)\" >> ./distributed_copy_test/result1.txt
+    
+    res1=$(log_command bendsql --dsn "$DSN"  -q \"select count\(\*\) from list_stage\(location=\>\'@s1\'\)\")
+    last_string1=$(echo "$res1" | awk -F',' '{print $NF}')
+
+    echo "start run $i $last_string1" >> ./distributed_copy_test/result1.txt
+    if [[ $last_string1 != $stage_expected ]]; then
+        echo "stage build 发现 mismatch, 结束循环 $last_string1" >> ./distributed_copy_test/result1.txt
+        break
+    fi
+    
+    log_command bendsql --dsn "$DSN"  -q \"copy into products from @s1 force = true purge = true\" >> ./distributed_copy_test/result1.txt
 
     res1=$(log_command bendsql --dsn "$DSN"  -q \"select count\(\*\) from list_stage\(location=\>\'@s1\'\)\")
     last_string1=$(echo "$res1" | awk -F',' '{print $NF}')
 
-    echo "start run $i $last_string1" > ./distributed_copy_test/result1.txt
+    echo "start run $i $last_string1" >> ./distributed_copy_test/result1.txt
     if [[ $last_string1 != $stage_expected ]]; then
         echo "stage 发现 mismatch, 结束循环 $last_string1" >> ./distributed_copy_test/result1.txt
         break
@@ -58,6 +69,6 @@ for ((i=1; i<=1000; i++)); do
         echo "b 发现 mismatch, 结束循环 $last_string1" >> ./distributed_copy_test/result1.txt
         break
     fi
-    log_command bendsql --dsn "$DSN"  -q \"truncate table products\"
-    log_command bendsql --dsn "$DSN"  -q \"drop stage if exists s1\"
+    log_command bendsql --dsn "$DSN"  -q \"truncate table products\" >> ./distributed_copy_test/result1.txt
+    log_command bendsql --dsn "$DSN"  -q \"drop stage if exists s1\" >> ./distributed_copy_test/result1.txt
 done

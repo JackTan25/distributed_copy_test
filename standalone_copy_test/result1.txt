@@ -1,2 +1,2 @@
-start run 548 \message\:\Health check failed: backend instance maybe crashed: Get \\http://10.1.116.87:8000/health\\: context deadline exceeded\}}"
-stage 发现 mismatch, 结束循环 \message\:\Health check failed: backend instance maybe crashed: Get \\http://10.1.116.87:8000/health\\: context deadline exceeded\}}"
+start run 530 "APIError: RequestError: error sending request for url (https://tnc7yee14--test-distributed-copy-for-parquet.gw.aws-us-east-2.default.datafusecloud.com/v1/query): error trying to connect: Connection reset by peer (os error 104)"
+stage build 发现 mismatch, 结束循环 "APIError: RequestError: error sending request for url (https://tnc7yee14--test-distributed-copy-for-parquet.gw.aws-us-east-2.default.datafusecloud.com/v1/query): error trying to connect: Connection reset by peer (os error 104)"
